@@ -10,7 +10,7 @@ This document explains **how the project works**, the **serial protocol** used b
 | **MCU** | STM32F401RE @ 22.184 MHz (CubeIDE / HAL) |
 | **Caliper** | Shahe/Guanglu compatible, 24‑bit single‑frame output |
 | **Wiring** | `CAL_CLK` → PA0 (EXTI), `CAL_DATA` → PA1, both pulled‑up (≈47 kΩ) |
-| **Display** | 6‑digit 7‑segment; 2 × 74HC595 driven by SPI2 + DMA + latch (PB12) |
+| **Display** | 6‑digit 7‑segment; SCT2024 driven by SPI2 + DMA + latch (PB12) |
 
 ```
 Caliper ── CLK ─┐                STM32F401
@@ -74,7 +74,7 @@ graph TD
   ExtractValues --> Showµm[Display_ShowMicrometers]
   Showµm --> FrontBuf
   TIM11 --->|every 50 ms| SPI_DMA
-  SPI_DMA --> 74HC595 --> 7SEG
+  SPI_DMA --> SCT2024 --> 7SEG
 ```
 
 1. **EXTI ISR** (`HAL_GPIO_EXTI_Callback`)
@@ -84,7 +84,7 @@ graph TD
 3. **main()** polls `Caliper_FrameReady()`; when true:
    * Converts raw24 → `rel_um` (µm) and toggles status LED.
    * Passes value to display driver.
-4. **display7seg.c** keeps a double buffer; TIM11 triggers DMA → SPI → 74HC595 → LED panel.
+4. **display7seg.c** keeps a double buffer; TIM11 triggers DMA → SPI → SCT2024 → LED panel.
 
 ---
 
@@ -101,5 +101,5 @@ graph TD
 
 ---
 
-© 2025 DevMachine / Open source under MIT License
+© 2025 JJ
 
