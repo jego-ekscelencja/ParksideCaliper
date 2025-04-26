@@ -1,0 +1,8 @@
+../Core/Src/display7seg.c:75:6:Display_Init	16	static
+../Core/Src/display7seg.c:93:6:Display_SetNumber	32	static
+../Core/Src/display7seg.c:141:6:Display_RefreshIfNeeded	4	static
+../Core/Src/display7seg.c:157:10:Display_GetFrontBuffer	4	static
+../Core/Src/display7seg.c:165:9:Display_NeedsUpdate	4	static
+../Core/Src/display7seg.c:171:6:Display_SetTime	24	static
+../Core/Src/display7seg.c:198:6:Display_ShowMicrometers	40	static
+../Core/Src/display7seg.c:245:6:Display_ShowRawHex	32	static
